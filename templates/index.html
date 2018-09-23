@@ -2,6 +2,20 @@
 {% block title %}Welcome to Caveman2{% endblock %}
 {% block content %}
 <div id="main">
-  Welcome to <a href="http://8arrow.org/caveman/">Caveman2</a>!
+  <form action="/task-add" method="POST">
+    <input type="text" name="name" value="{{ tasks.name }}">
+    <input type="submit" value="追加">
+  </form>
+  <ul>
+    {% for task in tasks %}
+    <li>
+      {{ task.name }}
+      <form action="/task-delete"  method="post">
+        <input type="hidden" name="id" value="{{ task.id }}">
+        <input type="submit" value="削除">
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}
