@@ -2,19 +2,25 @@
 {% block title %}Welcome to Caveman2{% endblock %}
 {% block content %}
 <div id="main">
-  <form action="/task-add" method="POST">
+  <form action="/task-add" method="post">
     <input type="text" name="name" value="{{ tasks.name }}">
     <input type="submit" value="追加">
   </form>
   <ul>
     {% for task in tasks %}
-    <li>
-      {{ task.name }}
+    <table border=0>
+      <tr>
+      <form action="/task-update"  method="post">
+        <td><input type="text" name="name" value="{{ task.name }}"></td>
+        <input type="hidden" name="id" value="{{ task.id }}">
+        <td><input type="submit" value="更新"></td>
+      </form>
       <form action="/task-delete"  method="post">
         <input type="hidden" name="id" value="{{ task.id }}">
-        <input type="submit" value="削除">
+        <td><input type="submit" value="削除"></td>
       </form>
-    </li>
+      </tr>
+    </table>
     {% endfor %}
   </ul>
 </div>
